@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FC, useState} from 'react';
-import {Button} from "../Button/Button";
+import {MyButton} from "../Button/MyButton";
 import {resetErrorAC, setErrorAC, setSettingsAC} from "../../BLL/state/counter-reducer";
 import {useDispatch} from "react-redux";
 import {SettingsType} from "../CounterContainer/CounterContainer";
@@ -66,7 +66,7 @@ export const Settings: FC<SettingsPropsType> = (props) => {
                 <input type="number" onChange={onChangeStartValue} value={changedSettings.startValue}/>
             </div>
             <div>
-                <Button name={'Set'} callback={onSetHandler} disabled={error}/>
+                <MyButton name={'Set'} callback={onSetHandler} disabled={error}/>
             </div>
 
 

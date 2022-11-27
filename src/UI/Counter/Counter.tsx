@@ -1,8 +1,8 @@
 import React, {FC, memo} from 'react';
 import {incrementAC, resetAC} from "../../BLL/state/counter-reducer";
 import {useDispatch} from "react-redux";
-import {Button} from "../Button/Button";
 import styles from './Counter.module.css'
+import {Button} from "@mui/material";
 
 type CounterPropsType = {
     currentValue: number
@@ -42,16 +42,23 @@ export const Counter: FC<CounterPropsType> = memo((props) => {
             }
 
             <Button
-                name={'inc'}
-                callback={increment}
+                variant='contained'
+                size='small'
+                color='primary'
                 disabled={error || settingsRules !== ''}
-
-            />
+                onClick={increment}
+            >
+                Add
+            </Button>
             <Button
-                name={'reset'}
-                callback={reset}
+                variant='contained'
+                size='small'
+                color='primary'
                 disabled={error || settingsRules !== ''}
-            />
+                onClick={reset}
+            >
+                Reset
+            </Button>
         </div>
     );
 });
