@@ -2,4 +2,5 @@
 .container {
     display: flex;
     margin: 100px;
+    flex-wrap: wrap;
 }

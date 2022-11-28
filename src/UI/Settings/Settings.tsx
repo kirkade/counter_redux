@@ -1,8 +1,9 @@
 import React, {ChangeEvent, FC, useState} from 'react';
-import {MyButton} from "../Button/MyButton";
 import {resetErrorAC, setErrorAC, setSettingsAC} from "../../BLL/state/counter-reducer";
 import {useDispatch} from "react-redux";
 import {SettingsType} from "../CounterContainer/CounterContainer";
+import {Button, TextField} from "@mui/material";
+import styles from './Settings.module.css'
 
 
 type SettingsPropsType = {
@@ -14,9 +15,7 @@ type SettingsPropsType = {
 export const Settings: FC<SettingsPropsType> = (props) => {
 
     const {settings, setSettingsRules, error} = props
-
     const dispatch = useDispatch()
-
 
     const [changedSettings, setChangedSettings] = useState<SettingsType>(settings)
 
@@ -36,7 +35,6 @@ export const Settings: FC<SettingsPropsType> = (props) => {
             dispatch(setErrorAC())
         } else {
             dispatch(resetErrorAC())
-            setSettingsRules('')
         }
 
     }
@@ -45,28 +43,52 @@ export const Settings: FC<SettingsPropsType> = (props) => {
         onChangeSettings({
             ...changedSettings,
             maxValue: event.currentTarget.valueAsNumber
-        }, 'enter values and press SAVE')
+        }, 'enter values and press Set')
     }
 
     const onChangeStartValue = (event: ChangeEvent<HTMLInputElement>) => {
         onChangeSettings({
             ...changedSettings,
             startValue: event.currentTarget.valueAsNumber
-        }, 'enter values and press SAVE')
+        }, 'enter values and press Set')
     }
 
     return (
-        <div>
-            <div>
-                <span>max value</span>
-                <input type="number" onChange={onChangeMaxValue} value={changedSettings.maxValue}/>
+        <div className={styles.settingsContainer}>
+            <div className={styles.inputContainer}>
+                <TextField
+                    variant='outlined'
+                    type={'number'}
+                    size={'small'}
+                    style={{margin:'10px'}}
+                    label={'Enter max value'}
+                    value={changedSettings.maxValue}
+                    onChange={onChangeMaxValue}
+                    error={changedSettings.maxValue < 1 || changedSettings.maxValue === changedSettings.startValue}
+                />
+
+                <TextField
+                    variant={'outlined'}
+                    type={'number'}
+                    size={'small'}
+                    style={{margin:'10px'}}
+                    label={'Enter start value'}
+                    value={changedSettings.startValue}
+                    onChange={onChangeStartValue}
+                    error={changedSettings.startValue < 0 || changedSettings.startValue >= changedSettings.maxValue}
+
+                />
             </div>
-            <div>
-                <span>start value</span>
-                <input type="number" onChange={onChangeStartValue} value={changedSettings.startValue}/>
-            </div>
-            <div>
-                <MyButton name={'Set'} callback={onSetHandler} disabled={error}/>
+            <div className={styles.button}>
+                <Button
+                    variant='contained'
+                    size='small'
+                    color='primary'
+                    disabled={error}
+                    onClick={onSetHandler}
+                >Set
+                </Button>
+
             </div>
 
 

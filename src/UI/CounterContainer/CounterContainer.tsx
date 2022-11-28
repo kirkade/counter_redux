@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Counter} from "../Counter/Counter";
-import {useSelector} from "react-redux";
-import {StateType} from "../../BLL/state/store";
+import {typedUseSelector} from "../../BLL/state/store";
 import styles from './CounterContainer.module.css'
 import {Settings} from "../Settings/Settings";
+import {CounterType} from "../../BLL/state/counter-reducer";
 
 export type SettingsType = {
     startValue: number,
@@ -12,22 +12,27 @@ export type SettingsType = {
 
 export const CounterContainer = () => {
 
-    const [settingsRules,setSettingsRules] = useState<string>('')
+    const [settingsRules, setSettingsRules] = useState<string>('')
 
-    const currentValue = useSelector<StateType, number>(state => state.counter.currentValue)
-    const maxValue = useSelector<StateType, number>(state => state.counter.settings.maxValue)
-    const error = useSelector<StateType, boolean>(state => state.counter.error)
-    const settings: SettingsType = useSelector<StateType,SettingsType>(state => state.counter.settings)
-
-
+    const counter = typedUseSelector<CounterType>(state => state.counter)
 
     return (
         <div className={styles.container}>
-            <div>
-                <Settings settings={settings} setSettingsRules={setSettingsRules} error={error}/>
+            <div style={{margin: '20px'}}>
+                <Settings
+                    settings={counter.settings}
+                    setSettingsRules={setSettingsRules}
+                    error={counter.error}
+                />
             </div>
-            <div>
-                <Counter currentValue={currentValue} maxValue={maxValue} error={error} settingsRules={settingsRules}/>
+
+            <div style={{margin: '20px'}}>
+                <Counter
+                    currentValue={counter.currentValue}
+                    maxValue={counter.settings.maxValue}
+                    error={counter.error}
+                    settingsRules={settingsRules}
+                />
             </div>
 
         </div>

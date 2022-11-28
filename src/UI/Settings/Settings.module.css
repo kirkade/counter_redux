@@ -1,6 +1,5 @@
 
-
-.counterContainer {
+.settingsContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,24 +8,15 @@
     height: 250px;
     box-shadow: 1px 1px 5px darkcyan;
     border-radius: 5px;
-
 }
 
-.number {
-    font-size: 60px;
-    color: darkcyan
-}
-.buttons {
+.inputContainer {
     display: flex;
-    margin-top:25px
+    flex-direction: column;
+    margin: 25px;
+
 }
 
-.buttons button {
-    margin: 10px;
-}
-
-.end {
-    color: red;
-    font-weight: bold;
-    font-size: 60px;
+.button {
+    margin-bottom: 20px;
 }

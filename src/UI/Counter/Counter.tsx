@@ -27,38 +27,42 @@ export const Counter: FC<CounterPropsType> = memo((props) => {
 
     const counterStyle = currentValue === maxValue ? styles.end : ''
 
-
     return (
-        <div>
-            {
-                error
-                    ? <div>Incorrect value!</div>
-                    : <div className={counterStyle}>
-                        {settingsRules !== ''
-                            ? settingsRules
-                            : currentValue}
-                    </div>
+        <div className={styles.counterContainer}>
+            <div className={styles.number}>
+                {
+                    error
+                        ? <div style={{color: 'red', fontSize: '30px'}}>Incorrect value!</div>
+                        : <div className={counterStyle}>
+                            {settingsRules !== ''
+                                ? <div style={{fontSize: '25px'}}>{settingsRules}</div>
+                                : currentValue}
+                        </div>
 
-            }
+                }
+            </div>
 
-            <Button
-                variant='contained'
-                size='small'
-                color='primary'
-                disabled={error || settingsRules !== ''}
-                onClick={increment}
-            >
-                Add
-            </Button>
-            <Button
-                variant='contained'
-                size='small'
-                color='primary'
-                disabled={error || settingsRules !== ''}
-                onClick={reset}
-            >
-                Reset
-            </Button>
+            <div className={styles.buttons}>
+                <Button
+                    variant='contained'
+                    size='small'
+                    color='primary'
+                    disabled={error || settingsRules !== '' || currentValue === maxValue}
+                    onClick={increment}
+                >
+                    Inc
+                </Button>
+                <Button
+                    variant='contained'
+                    size='small'
+                    color='primary'
+                    disabled={error || settingsRules !== ''}
+                    onClick={reset}
+                >
+                    Reset
+                </Button>
+            </div>
+
         </div>
     );
 });

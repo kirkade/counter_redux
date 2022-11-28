@@ -1,4 +1,3 @@
-import React from 'react';
 import {SettingsType} from "../../UI/CounterContainer/CounterContainer";
 
 
@@ -16,7 +15,7 @@ const initialState: CounterType = {
         startValue: 0,
         maxValue: 5,
     },
-    error:false
+    error: false
 
 }
 export type IncrementAT = ReturnType<typeof incrementAC>
@@ -37,7 +36,7 @@ export const CounterReducer = (state = initialState, action: CounterActionType):
             return {
                 ...state,
                 currentValue: action.settings.startValue,
-                settings: {startValue:action.settings.startValue,maxValue:action.settings.maxValue},
+                settings: {startValue: action.settings.startValue, maxValue: action.settings.maxValue},
             }
         case 'SET_ERROR':
             return {...state, error: true}
