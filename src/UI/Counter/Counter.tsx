@@ -35,7 +35,7 @@ export const Counter: FC<CounterPropsType> = memo((props) => {
                         ? <div style={{color: 'red', fontSize: '30px'}}>Incorrect value!</div>
                         : <div className={counterStyle}>
                             {settingsRules !== ''
-                                ? <div style={{fontSize: '25px'}}>{settingsRules}</div>
+                                ? <div style={{fontSize: '25px', color:'darkcyan'}}>{settingsRules}</div>
                                 : currentValue}
                         </div>
 

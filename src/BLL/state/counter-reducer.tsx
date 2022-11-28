@@ -31,6 +31,7 @@ export const CounterReducer = (state = initialState, action: CounterActionType):
         case "INCREMENT":
             return {...state, currentValue: state.currentValue + 1}
         case "RESET" :
+            localStorage.clear()
             return {...state, currentValue: state.settings.startValue}
         case "SET-SETTINGS":
             return {
